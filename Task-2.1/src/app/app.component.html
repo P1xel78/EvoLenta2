@@ -1,0 +1,21 @@
+<h1>Вывод объектов в переменной из сервиса в шаблон через цикл</h1>
+
+<h4>Параметры</h4>
+<div class="conteiner">
+  <div>
+    <h5>UserId:</h5>
+    <p *ngFor="let response of massObj">{{ response.userId }}</p>
+  </div>
+  <div>
+    <h5>Id:</h5>
+    <p *ngFor="let response of massObj">{{ response.id }}</p>
+  </div>
+  <div>
+    <h5>Title:</h5>
+    <p *ngFor="let response of massObj">{{ response.title }}</p>
+  </div>
+  <div>
+    <h5>Completed:</h5>
+    <p *ngFor="let response of massObj">{{ response.completed }}</p>
+  </div>
+</div>
