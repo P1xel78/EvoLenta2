@@ -1,0 +1,30 @@
+<h1>Практическое задание 11: rxJS</h1>
+<div class="conteiner d-flex">
+  <div class="d-inline-block w-75 p-2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="table-dark">Цифры начиная с 0</th>
+          <th class="table-dark">Рандомные цифры</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="table-success"
+          *ngFor="let number of massNumber1; index as i"
+        >
+          <td>{{ number }}</td>
+          <td>{{ massNumber2[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-inline-block w-25 p-2" style="margin-top: 0px">
+    <button type="button" class="btn btn-success" (click)="enableInterval()">
+      Начать
+    </button>
+    <button type="button" class="btn btn-danger" (click)="disableInterval()">
+      Стоп
+    </button>
+  </div>
+</div>
