@@ -1,0 +1,43 @@
+<div class="cont">
+  <div class="">
+    <h1>Получить таблицу с успеваемостью группы</h1>
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addTemplate1()"
+        style="margin-right: 5px"
+      >
+        Группа 401
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addTemplate2()"
+        style="margin-right: 5px"
+      >
+        Группа 402
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addTemplate3()"
+        style="margin-right: 5px"
+      >
+        Группа 403
+      </button>
+      <button type="button" class="btn btn-primary" (click)="addTemplate4()">
+        Группа 404
+      </button>
+    </div>
+  </div>
+  <ng-template #dynamicComp></ng-template>
+  <button
+    type="button"
+    class="btn btn-primary ms-2"
+    (click)="deleteTemplate()"
+    *ngIf="view"
+  >
+    Скрыть таблицу
+  </button>
+</div>
