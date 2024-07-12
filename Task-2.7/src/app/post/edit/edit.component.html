@@ -1,0 +1,33 @@
+<form class="form ms-5 mt-3">
+  <div class="mb-3">
+    <label class="form-label me-2">Title: </label>
+    <input
+      placeholder="{{ title }}"
+      name="first_name"
+      #firstName="ngModel"
+      [(ngModel)]="create_person.title"
+      autocomplete="off"
+      style="width: 300px"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label me-1">Body: </label>
+    <textarea
+      #secondName="ngModel"
+      name="second_name"
+      [(ngModel)]="create_person.body"
+      placeholder="{{ body }}"
+      style="width: 300px; height: 200px"
+      autocomplete="off"
+    >
+    </textarea>
+  </div>
+  <button
+    [disabled]="firstName.invalid || secondName.invalid"
+    (click)="updatePost()"
+    type="submit"
+    class="btn btn-dark"
+  >
+    Добавить
+  </button>
+</form>

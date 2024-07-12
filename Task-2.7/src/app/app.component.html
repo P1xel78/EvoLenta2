@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5 fs-3" routerLink="/">Главная страница</a>
+    <ul class="navbar-nav me-auto mb-0">
+      <li class="nav-item">
+        <a class="navbar-brand ms-5 fs-6" routerLink="/" (click)="updateUser()"
+          >Сменить пользователя</a
+        >
+      </li>
+    </ul>
+    <p class="navbar-nav nav-link">Вы: {{ service.role }}</p>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

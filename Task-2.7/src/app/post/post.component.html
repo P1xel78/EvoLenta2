@@ -1,0 +1,51 @@
+<!-- <div>
+  <p>{{ title }}</p>
+  <hr />
+  <p>{{ body }}</p>
+  <button type="button" class="btn btn-primary" routerLink="edit">
+    Редактирование данных
+  </button>
+</div> -->
+
+<!-- <div class="border border-primary" style="width: max-content; height: max-content; margin: 10px">
+  <div>
+    <td>{{ title }}</td>
+    <hr />
+    <td>{{ body }}</td>
+  </div>
+</div>
+<button type="button" class="btn btn-primary" routerLink="edit" (click)="openForm()">
+    Редактирование данных
+  </button>
+
+<router-outlet *ngIf="state"></router-outlet> -->
+
+<section>
+  <div
+    style="height: max-content; width: max-content; max-width: 93%"
+    class="ms-5 fs-3 mt-3"
+  >
+    <div class="card" style="background-color: darkslategray">
+      <div>
+        <h1>{{ title }}</h1>
+        <hr />
+        <p>{{ body }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button
+  type="button"
+  class="btn ms-5 mt-3"
+  routerLink="edit"
+  (click)="openForm()"
+>
+  <img
+    src="https://avatars.mds.yandex.net/i?id=7b8a5674b21fbdc3ec5a50b05b88215f9964173d08d1a546-5341249-images-thumbs&n=13"
+    alt=""
+    style="width: 50px; height: 50px"
+  />
+</button>
+
+<router-outlet *ngIf="state"></router-outlet>

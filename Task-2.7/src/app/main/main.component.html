@@ -1,0 +1,19 @@
+<div>
+  <h3 class="text-center">Список постов</h3>
+</div>
+<hr />
+<section class="cards-wrapper">
+  <div class="card-grid-space" *ngFor="let post of posts; index as i">
+    <a
+      class="card"
+      style="background-color: darkslategray"
+      routerLink="post/{{ i }}"
+      [queryParams]="{ title: post.title, body: post.body }"
+    >
+      <div>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.body }}</p>
+      </div>
+    </a>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700");
+
+.card {
+  font-family: "Heebo";
+  --bg-filter-opacity: 0.5;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, var(--bg-filter-opacity)),
+      rgba(0, 0, 0, var(--bg-filter-opacity))
+    ),
+    var(--bg-img);
+  font-size: 20px;
+  color: white;
+  border-radius: 1em; 
+  padding: 1em;
+  border: 10px solid #ccc;
+}
+
+.card p {
+  font-size: 0.75em;
+  font-family: "Open Sans";
+}
