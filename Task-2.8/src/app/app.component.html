@@ -1,0 +1,58 @@
+<div class="container container-fluid">
+  <h1 class="header">ToDo</h1>
+  <form class="row g-6 mb-4">
+    <div class="col-auto">
+      <input
+        type="text"
+        class="form-control col-auto"
+        placeholder="Введите задачу"
+        name="taskName"
+        #taskField="ngModel"
+        [(ngModel)]="newTodo"
+        maxlength="32"
+        minlength="1"
+        required
+      />
+    </div>
+    <div class="col-auto">
+      <button
+        [disabled]="taskField.invalid"
+        type="submit"
+        class="btn btn-outline-primary"
+        (click)="addTodo()"
+      >
+        Добавить
+      </button>
+    </div>
+  </form>
+  <hr />
+  <ng-container *ngFor="let task of tasksList">
+    <div class="form-check col-auto border border-3" style="display: flex">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        [id]="task.id"
+        (change)="taskChecked(task.id!, $event)"
+      />
+      <label
+        class="form-check-label"
+        style="
+          justify-content: flex-start;
+          margin-right: auto;
+          margin-left: 10px;
+        "
+        [for]="task.id"
+        [ngClass]="{ 'striked-text': task.isDone }"
+      >
+        {{ task.taskText }}
+      </label>
+      <input
+        type="button"
+        class="btn btn-close mb-1 ms-5 col-md-8 text-danger"
+        aria-label="Close"
+        (click)="deleteTodo(task.id!)"
+      />
+    </div>
+  </ng-container>
+</div>
