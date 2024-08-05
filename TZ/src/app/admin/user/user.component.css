@@ -1,0 +1,52 @@
+.role-user {
+  background-color: #dbeafe;
+  max-height: 24px;
+}
+
+.role-admin {
+  background-color: #fee2e2;
+  max-height: 24px;
+}
+
+.user-info {
+  max-height: 78px;
+}
+
+.s14w500h22b {
+  color: #6b7280;
+}
+
+button {
+  max-height: 38px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 512px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 572px) {
+  .user-info {
+    max-height: none;
+  }
+}

@@ -1,0 +1,59 @@
+span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3a3395;
+}
+
+th {
+  background-color: #d7d9dc;
+}
+
+img {
+  max-height: 40px;
+}
+
+.status {
+  background-color: #d1fae5;
+  max-width: 70px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.heading-small {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 512px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 572px) {
+  .heading-small {
+    display: flex;
+  }
+  .heading {
+    display: none;
+  }
+}

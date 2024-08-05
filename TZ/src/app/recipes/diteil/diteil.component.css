@@ -1,0 +1,169 @@
+.container {
+  margin-top: 100px;
+}
+
+.icon {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.oneCol {
+  max-width: 840px;
+  min-height: 100%;
+  border-radius: 30px;
+  margin-right: 40px;
+}
+
+.twoCol {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+}
+
+.author {
+  padding-top: 35px;
+  display: flex;
+}
+
+.author img {
+  top: 0;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 100%;
+}
+
+.name {
+  display: inline-block;
+  padding-left: 20px;
+}
+
+.hr {
+  padding-top: 35px;
+  display: flex;
+}
+
+span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.1em;
+  color: #000000;
+}
+
+.img img {
+  max-width: 100%;
+  border-radius: 30px;
+  height: 100%;
+}
+
+.foodCen {
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 30px;
+  height: 100%;
+  background-color: #e7fafe;
+}
+
+.foodValue {
+  padding-top: 16px;
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+}
+
+.foodValue hr {
+  border: 1px solid rgb(0, 0, 0.6);
+}
+
+.bodyRes {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 512px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.favorite {
+  font-size: 5rem;
+  width: 80px;
+  height: 80px;
+  background-color: #e7fafe;
+  padding: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.favorite button {
+  font-size: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (max-width: 1280px) {
+  .twoCol {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .oneCol {
+    max-width: 100%;
+    height: 100%;
+  }
+  .foodCen {
+    max-width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 572px) {
+  .container {
+    margin-top: 10px;
+  }
+  .description {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .icon {
+    min-width: 50px;
+    min-height: 50px;
+  }
+  .hr {
+    display: none;
+  }
+}

@@ -1,0 +1,152 @@
+<app-header></app-header>
+
+<div class="container" *ngIf="user">
+  <div class="user-info d-flex justify-content-between mt-5">
+    <div class="d-flex h-10">
+      <img
+        class="rounded-circle me-3"
+        src="{{ user.avatar }}"
+        alt=""
+        width="64px"
+        height="64px"
+      />
+      <div>
+        <div class="s24w600h29b">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="s14w500h22b">Создан {{ user.createdOn | dataRus }}</div>
+        <div class="s14w500h22b">{{ user.username }}</div>
+      </div>
+
+      <p
+        class="d-flex role-user rounded p-2 align-items-center"
+        *ngIf="user.role === 'user'"
+      >
+        ·Пользователь
+      </p>
+
+      <p
+        class="d-flex role-admin rounded p-2 align-items-center"
+        *ngIf="user.role === 'admin'"
+      >
+        ·Администратор
+      </p>
+    </div>
+    <button class="btn btn-danger" (click)="openModal()">Удалить</button>
+    <div class="modal" *ngIf="isModalVisible">
+        <div class="modal-content">
+          <div class="d-flex">
+            <img src="assets/img/warning.png" alt="" style="max-height: 40px;"/>
+            <div class="d-flex flex-column align-items-start">
+              <p class="s18w500h22b d-block">Удалить этого пользователя?</p>
+              <p class="s14w400h22g d-block">
+                Вы хотите удалить {{ user.username }}. Действие нельзя
+                отменить
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="modal-buttons">
+            <button
+              class="btn btn-primary"
+              (click)="closeModal()"
+              style="
+                max-width: 118px;
+                max-height: 50px;
+                background: #ffffff;
+                border-radius: 6px;
+                color: #000000;
+                border-color: #6b7280;
+              "
+            >
+              Закрыть
+            </button>
+            <button
+              class="btn btn-primary"
+              (click)="deleteUser(user.id)"
+              style="
+                max-width: 118px;
+                max-height: 50px;
+                background: #dd0035;
+                border-radius: 6px;
+                color: #ffffff;
+                margin-left: 17px;
+              "
+            >
+              Удалить
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="gridThree d-grid mt-5">
+    <div class="border rounded p-4 m-3">
+      <p class="s14w500h22b">Всего рецептов</p>
+      <p class="s24w600h29b">{{ postLength }}</p>
+    </div>
+    <div class="border rounded p-4 m-3">
+      <p class="s14w500h22b">Всего комментариев</p>
+      <p class="s24w600h29b">{{ commentLength }}</p>
+    </div>
+    <div class="border rounded p-4 m-3">
+      <p class="s14w500h22b">Статус</p>
+      <div class="s24w600h29b">
+        <p *ngIf="user.isActive === true">Активен</p>
+        <p *ngIf="user.isActive === false">Не активен</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <p class="s18w500h22b pb-3">Созданные рецепты</p>
+    <hr class="pb-3" />
+    <div class="d-grid gridFour">
+      <div class="m-4" *ngFor="let post of user.posts; let i = index">
+        <a
+          routerLink="/recipes/{{ post.id }}"
+          [queryParams]="{ id: post.id }"
+          class="link-dark text-decoration-none"
+        >
+          <div class="fourImage">
+            <img
+              src="{{ post.image }}"
+              alt=""
+              *ngIf="post.image !== 'Тестовый рецепт'; else noImage"
+            />
+            <ng-template #noImage>
+              <div class="placeholder"></div>
+            </ng-template>
+          </div>
+          <div>
+            <p>Рецепт {{ i + 1 }}</p>
+            <p class="s14w500h22b">Создан: {{ post.createdOn | dataTime }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <p class="s18w500h22b pb-3">Информация об аккаунте</p>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="s14w500h22b">Фамилия</td>
+          <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+            <td class="s14w500h22b">Имя</td>
+            <td>{{ user.firstName }}</td>
+          </tr>
+          <tr>
+            <td class="s14w500h22b">Отчество</td>
+            <td>{{ user.middleName }}</td>
+          </tr>
+          <tr>
+            <td class="s14w500h22b">User-Agent</td>
+            <td>{{ user.userAgent }}</td>
+          </tr>
+          <tr>
+            <td class="s14w500h22b">Последний раз заходил</td>
+            <td>{{ user.lastEntry | dataRus }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container">
+    <div class="gridThree d-grid">
+        <div class="m-4 position-relative" *ngFor="let res of resepts">
+          <a
+            routerLink="{{ res.id }}"
+            [queryParams]="{ id: res.id }"
+            style="text-decoration: none"
+          >
+            <div class="threeImag">
+              <img
+                *ngIf="res.image !== 'Тестовый рецепт'; else noImage"
+                src="{{ res.image }}"
+                alt=""
+              />
+              <ng-template #noImage>
+                <div class="placeholder"></div>
+              </ng-template>
+            </div>
+            <p class="s18w500h22b">{{ res.title }}</p>
+            <div class="botIcon d-flex justify-content-between">
+              <div class="d-inline-block" style="align-items: center">
+                <img
+                  class="d-inline-block"
+                  src="assets/img/Timer.png"
+                  alt="time"
+                  width="24px"
+                  height="24px"
+                />
+                <div class="d-inline-block s14w500h22b">
+                  <div>{{ res.timeCooking }} минут</div>
+                </div>
+              </div>
+              <div class="d-inline-block">
+                <img
+                  class="d-inline-block"
+                  src="assets/img/ForkKnife.png"
+                  alt="knife"
+                />
+                <div class="d-inline-block s14w500h22b">
+                  <p>{{ res.tags }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="likeIcon position-absolute" style="top: 0; right: 0">
+            <button
+              (click)="apiService.toggleLike(res.id)"
+              [ngStyle]="{ color: apiService.isLiked(res.id) ? 'red' : 'grey' }"
+              class="heart-button"
+            >
+              ♥
+            </button>
+          </div>
+        </div>
+      </div>
+</div>
+<app-footer></app-footer>

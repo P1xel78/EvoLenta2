@@ -1,0 +1,296 @@
+<app-header></app-header>
+<div class="container">
+  <p class="s36w600h44b mt-5">Создание рецепта</p>
+  <div class="d-flex flex-column mt-4">
+    <div class="d-flex flex-column w-100">
+      <p class="s18w600h24bl">Основная информация</p>
+      <hr />
+      <form #nameForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Название рецепта</p>
+        <input
+          type="text"
+          id="nameForm"
+          name="nameForm"
+          class="longInput form-control"
+          placeholder="Введите название рецепта..."
+          [(ngModel)]="resept.title"
+          [ngClass]="{
+            'is-invalid':
+              nameForm.invalid && (nameForm.dirty || nameForm.touched),
+            'is-valid': resept.title && !nameForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #bodyForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Краткое описание</p>
+        <textarea
+          type="text"
+          id="bodyForm"
+          name="bodyForm"
+          class="form-control"
+          placeholder="Опишите о чем ваш рецепт"
+          [(ngModel)]="resept.body"
+          [ngClass]="{
+            'is-invalid':
+              bodyForm.invalid && (bodyForm.dirty || bodyForm.touched),
+            'is-valid': resept.body && !bodyForm.invalid
+          }"
+          required
+        ></textarea>
+      </form>
+      <hr />
+      <p class="s18w600h24bl mt-4">Дополнительная информация</p>
+      <hr />
+      <form #tagForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Категория</p>
+        <input
+          type="text"
+          id="tagForm"
+          name="tagForm"
+          class="smallInput form-control"
+          placeholder="Введите категорию и нажмите Enter"
+          [(ngModel)]="tags"
+          (keyup.enter)="addWord()"
+          [ngClass]="{
+            'is-invalid': tagForm.invalid && (tagForm.dirty || tagForm.touched),
+            'is-valid': tags && !tagForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #timeForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Время приготовлнения</p>
+        <input
+          type="text"
+          id="timeForm"
+          name="timeForm"
+          class="smallInput form-control"
+          [(ngModel)]="resept.timeCooking"
+          name="time"
+          [ngClass]="{
+            'is-invalid':
+              timeForm.invalid && (timeForm.dirty || timeForm.touched),
+            'is-valid': resept.timeCooking && !timeForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #proteinForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Белки</p>
+        <input
+          type="text"
+          id="timeForm"
+          name="timeForm"
+          class="smallInput form-control"
+          [(ngModel)]="resept.foodValue.proteins"
+          [ngClass]="{
+            'is-invalid':
+              proteinForm.invalid && (proteinForm.dirty || proteinForm.touched),
+            'is-valid': resept.foodValue.proteins && !proteinForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #fatsForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Жиры</p>
+        <input
+          type="text"
+          id="fatsForm"
+          name="fatsForm"
+          class="smallInput form-control"
+          [(ngModel)]="resept.foodValue.fats"
+          [ngClass]="{
+            'is-invalid':
+              fatsForm.invalid && (fatsForm.dirty || fatsForm.touched),
+            'is-valid': resept.foodValue.fats && !fatsForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #carbohForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Углеводы</p>
+        <input
+          type="text"
+          id="carbohForm"
+          name="carbohForm"
+          class="smallInput form-control"
+          [(ngModel)]="resept.foodValue.carbohydrates"
+          [ngClass]="{
+            'is-invalid':
+              carbohForm.invalid && (carbohForm.dirty || carbohForm.touched),
+            'is-valid': resept.foodValue.carbohydrates && !carbohForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <form #coloriesForm="ngForm" class="d-flex justify-content-between w-75">
+        <p>Каллории</p>
+        <input
+          type="text"
+          id="coloriesForm"
+          name="coloriesForm"
+          class="smallInput form-control"
+          [(ngModel)]="resept.foodValue.calories"
+          [ngClass]="{
+            'is-invalid':
+              coloriesForm.invalid &&
+              (coloriesForm.dirty || coloriesForm.touched),
+            'is-valid': resept.foodValue.calories && !coloriesForm.invalid
+          }"
+          required
+        />
+      </form>
+      <hr />
+      <p class="s18w600h24bl mt-4">Детальная информация</p>
+      <p class="s14w400h22g">Детально опишите первый шаг вашего рецепта</p>
+      <hr />
+      <div>
+        <form *ngFor="let entry of resept.cookingSteps; let i = index">
+          <div class="d-flex justify-content-between w-75">
+            <label for="shortAction{{ i }}">Краткое действие:</label>
+            <input
+              type="text"
+              class="smallInput form-control"
+              placeholder="Разогреть сковородку"
+              [(ngModel)]="entry.title"
+              #shortDesc2="ngModel"
+              name="shortAction"
+              [ngClass]="{
+                'is-invalid':
+                  shortDesc2.invalid &&
+                  (shortDesc2.dirty || shortDesc2.touched),
+                'is-valid': entry.title && !shortDesc2.invalid
+              }"
+              required
+            />
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between w-75">
+            <label for="description{{ i }}">Описание:</label>
+            <textarea
+              class="form-control"
+              placeholder="Разогреть сковородку. Затем положить туда репчатый лук"
+              [(ngModel)]="entry.description"
+              name="description"
+              #descrip="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  descrip.invalid && (descrip.dirty || descrip.touched),
+                'is-valid': entry.description && !descrip.invalid
+              }"
+              required
+            ></textarea>
+          </div>
+          <hr />
+        </form>
+        <button
+          class="btn btn-prymary"
+          style="
+            width: 160px;
+            height: 50px;
+            background: #3a3395;
+            border-radius: 6px;
+            color: #ffffff;
+          "
+          (click)="addActionEntry()"
+        >
+          Добавить еще
+        </button>
+      </div>
+      <p class="s18w600h24bl mt-5">Ингредиенты</p>
+      <hr />
+      <div>
+        <form
+          action=""
+          class="mt-3"
+          *ngFor="let ingredient of resept.ingredients; let i = index"
+        >
+          <div class="d-flex justify-content-between w-75">
+            <label for="name{{ i }}">Название ингредиента</label>
+            <input
+              type="text"
+              class="smallInput form-control"
+              [(ngModel)]="ingredient.title"
+              name="ingredName"
+              #ingredName="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  ingredName.invalid &&
+                  (ingredName.dirty || ingredName.touched),
+                'is-valid': ingredient.title && !ingredName.invalid
+              }"
+              placeholder="Введите название ингредиента..."
+              required
+            />
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between w-75">
+            <label for="description{{ i }}">Описание</label>
+            <input
+              type="text"
+              class="smallInput form-control"
+              [(ngModel)]="ingredient.description"
+              name="ingredDescription"
+              #ingredDescription="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  ingredDescription.invalid &&
+                  (ingredDescription.dirty || ingredDescription.touched),
+                'is-valid': ingredient.description && !ingredDescription.invalid
+              }"
+              placeholder="Кратко опишите ингредиент..."
+              required
+            />
+          </div>
+          <hr />
+        </form>
+        <button
+          class="btn btn-prymary"
+          style="
+            width: 160px;
+            height: 50px;
+            background: #3a3395;
+            border-radius: 6px;
+            color: #ffffff;
+          "
+          (click)="addIngredient()"
+        >
+          Добавить еще
+        </button>
+      </div>
+    </div>
+    <div class="send d-flex justify-content-end">
+      <button
+        class="btn btn-prymary"
+        style="
+          min-width: 230px;
+          height: 50px;
+          background: #3a3395;
+          border-radius: 6px;
+          color: #ffffff;
+        "
+        [disabled]="
+          nameForm.invalid ||
+          bodyForm.invalid ||
+          tagForm.invalid ||
+          timeForm.invalid ||
+          proteinForm.invalid ||
+          fatsForm.invalid ||
+          carbohForm.invalid ||
+          coloriesForm.invalid
+        "
+        (click)="submitForm()"
+      >
+        Отправить рецепт
+      </button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

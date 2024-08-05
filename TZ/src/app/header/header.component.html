@@ -1,0 +1,187 @@
+<hr />
+<div class="header">
+  <div class="container">
+    <div class="d-flex row align-items-end" style="flex-wrap: nowrap">
+      <div class="d-inline-block col">
+        <div class="s24w600h29b">
+          <p>Foodie</p>
+        </div>
+      </div>
+      <div class="d-inline-block col">
+        <nav class="menu">
+          <ul class="d-flex justify-content-evenly">
+            <li class="li"><a routerLink="">Главная</a></li>
+            <li class="li">
+              <a class="bigText" routerLink="/recipes">Каталог рецептов</a
+              ><a class="smallText" routerLink="/recipes">Каталог</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="d-inline-block col">
+        <nav class="auth" style="text-align: right">
+          <button
+            class="bigText btn shadow-lg shadow-intensity-lg shadow-primary btn-primary"
+            style="background-color: #3a3395"
+            routerLink="/authorization"
+            *ngIf="apiService.role === 'gost'"
+          >
+            Вход в аккаунт
+          </button>
+          <button
+            class="smallText btn shadow-lg shadow-intensity-lg shadow-primary btn-primary"
+            style="background-color: #3a3395"
+            routerLink="/authorization"
+            *ngIf="apiService.role === 'gost'"
+          >
+            Вход
+          </button>
+
+          <div
+            *ngIf="apiService.role === 'user' || apiService.role === 'admin'"
+            class="d-flex align-items-center justify-content-end"
+          >
+            <div class="d-inline-block">
+              <a>
+                <img
+                  src="assets/img/setting.svg"
+                  alt=""
+                  width="25"
+                  height="25"
+                />
+              </a>
+            </div>
+            <div class="bigText">
+              <div class="dropdown d-inline-block ps-3">
+                <a
+                  class="nav-link dropdown-toggle d-flex"
+                  href="#"
+                  id="navbarDarkDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <div class="d-inline-block">
+                    <img
+                      src="{{ apiService.avatar }}"
+                      alt=""
+                      width="41px"
+                      height="41px"
+                    />
+                  </div>
+                  <div class="d-inline-block">
+                    <span
+                      >{{ apiService.lastName }}
+                      <span> {{ apiService.firstName }}</span></span
+                    >
+                    <p class="s12w400h20g" *ngIf="apiService.role === 'user'">Пользователь</p>
+                    <p class="s12w400h20g" *ngIf="apiService.role === 'admin'">Администратор</p>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" style="margin-top: 15px">
+                  <li>
+                    <a class="dropdown-item">
+                      Вы вошли как {{ apiService.username }}
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      routerLink=""
+                      style="color: #374151"
+                    >
+                      Настройки аккаунта
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      style="color: #374151"
+                      routerLink="/create-recipe"
+                    >
+                      Создание рецепта
+                    </button>
+                  </li>
+                  <li *ngIf="apiService.role === 'admin'">
+                    <button
+                      class="dropdown-item"
+                      style="color: #374151"
+                      routerLink="/admin"
+                    >
+                      Администрирование
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      style="color: #be2d2d"
+                      (click)="logout()"
+                    >
+                      Выход
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="smallText">
+              <div class="two dropdown d-inline-block ps-3">
+                <a
+                  class="two nav-link dropdown-toggle d-flex"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <div class="two d-inline-block">
+                    <img
+                      src="{{ apiService.avatar }}"
+                      alt=""
+                      width="41px"
+                      height="41px"
+                    />
+                  </div>
+                </a>
+
+                <ul class="two dropdown-menu" style="margin-top: 15px">
+                  <li>
+                    <a class="two dropdown-item">
+                      Вы вошли как {{ apiService.username }}
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      class="two dropdown-item"
+                      routerLink=""
+                      style="color: #374151"
+                    >
+                      Настройки аккаунта
+                    </button>
+                  </li>
+                  <li *ngIf="apiService.role === 'admin'">
+                    <button
+                      class="two dropdown-item"
+                      routerLink="/admin"
+                      style="color: #374151"
+                    >
+                      Администрирование
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="two dropdown-item"
+                      style="color: #be2d2d"
+                      (click)="logout()"
+                    >
+                      Выход
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

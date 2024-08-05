@@ -1,0 +1,195 @@
+<app-header></app-header>
+<div class="container">
+  <p class="s36w600h44b mt-5">Панель администрирования</p>
+  <div>
+    <tabset class="w-100">
+      <tab>
+        <ng-template tabHeading>
+          <span class="heading">Управление пользователями</span>
+          <span class="heading-small">Пользователи</span>
+        </ng-template>
+        <table class="table table-sm mt-5">
+          <thead>
+            <tr>
+              <th scope="col-5">Наименование</th>
+              <th scope="col">Статус</th>
+              <th scope="col">Роль</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td class="w-50">{{ user.username }}</td>
+              <td>
+                <div class="status" *ngIf="user.isActive === true">Активен</div>
+                <div class="status" *ngIf="user.isActive === false">
+                  Не активен
+                </div>
+              </td>
+              <td>
+                <div *ngIf="user.role === 'admin'">Администратор</div>
+                <div *ngIf="user.role === 'user'">Пользователь</div>
+              </td>
+              <td>
+                <div class="d-inline-block">
+                  <a
+                    role="button"
+                    routerLink="users/{{ user.id }}"
+                    [queryParams]="{ id: user.id }"
+                  >
+                    <img src="assets/img/setting.svg" alt="" />
+                  </a>
+                </div>
+              </td>
+              <td>
+                <a (click)="openModal()" role="button">
+                  <img src="assets/img/trash.png" alt=""
+                /></a>
+                <div class="modal" *ngIf="isModalVisible">
+                  <div class="modal-content">
+                    <div class="d-flex">
+                      <img src="assets/img/warning.png" alt="" />
+                      <div class="d-flex flex-column align-items-start">
+                        <p class="s18w500h22b d-block">Удалить этого пользователя?</p>
+                        <p class="s14w400h22g d-block">
+                          Вы хотите удалить {{ user.username }}. Действие нельзя
+                          отменить
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="modal-buttons">
+                      <button
+                        class="btn btn-primary"
+                        (click)="closeModal()"
+                        style="
+                          max-width: 118px;
+                          max-height: 50px;
+                          background: #ffffff;
+                          border-radius: 6px;
+                          color: #000000;
+                          border-color: #6b7280;
+                        "
+                      >
+                        Закрыть
+                      </button>
+                      <button
+                        class="btn btn-primary"
+                        (click)="deleteUser(user.id)"
+                        style="
+                          max-width: 118px;
+                          max-height: 50px;
+                          background: #dd0035;
+                          border-radius: 6px;
+                          color: #ffffff;
+                          margin-left: 17px;
+                        "
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <span class="heading">Управление рецептами</span>
+          <span class="heading-small">Рецепты</span>
+        </ng-template>
+        <table class="table table-sm mt-5">
+          <thead>
+            <tr>
+              <th scope="col-5">Название рецепта</th>
+              <th scope="col">Краткое описание</th>
+              <th scope="col">ID рецепта</th>
+              <th scope="col">Категория</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts">
+              <td class="w-50">{{ post.title }}</td>
+              <td>
+                {{post.body}}
+              </td>
+              <td>
+                {{post.id}}
+              </td>
+              <td>
+                {{post.tags}}
+              </td>
+              <td>
+                <div class="d-inline-block">
+                  <a
+                    role="button"
+                    routerLink="resipes/{{ post.id }}"
+                    [queryParams]="{ id: post.id }"
+                  >
+                    <img src="assets/img/setting.svg" alt="" />
+                  </a>
+                </div>
+              </td>
+              <td>
+                <a (click)="openModal()" role="button">
+                  <img src="assets/img/trash.png" alt=""
+                /></a>
+                <div class="modal" *ngIf="isModalVisible">
+                  <div class="modal-content">
+                    <div class="d-flex">
+                      <img src="assets/img/warning.png" alt="" />
+                      <div class="d-flex flex-column align-items-start">
+                        <p class="s18w500h22b d-block">Удалить этот пост?</p>
+                        <p class="s14w400h22g d-block">
+                          Вы хотите удалить {{ post.title }}. Действие нельзя
+                          отменить
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="modal-buttons">
+                      <button
+                        class="btn btn-primary"
+                        (click)="closeModal()"
+                        style="
+                          max-width: 118px;
+                          max-height: 50px;
+                          background: #ffffff;
+                          border-radius: 6px;
+                          color: #000000;
+                          border-color: #6b7280;
+                        "
+                      >
+                        Закрыть
+                      </button>
+                      <button
+                        class="btn btn-primary"
+                        (click)="deletePost(post.id)"
+                        style="
+                          max-width: 118px;
+                          max-height: 50px;
+                          background: #dd0035;
+                          border-radius: 6px;
+                          color: #ffffff;
+                          margin-left: 17px;
+                        "
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+    </tabset>
+  </div>
+</div>
+<app-footer></app-footer>

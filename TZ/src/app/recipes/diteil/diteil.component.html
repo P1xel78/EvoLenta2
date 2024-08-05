@@ -1,0 +1,342 @@
+<app-header></app-header>
+<div class="container" *ngIf="firstPost">
+  <div class="gridTwo d-grid">
+    <div class="oneCol">
+      <p class="s60w600h73b">{{ firstPost.title }}</p>
+      <div>
+        <div class="description">
+          <div class="author">
+            <img src="{{ firstPost.author.avatar }}" alt="" />
+            <div class="name">
+              <div class="NickName">
+                <span
+                  >{{ firstPost.author.firstName }}
+                  <span>{{ firstPost.author.lastName }}</span></span
+                >
+              </div>
+              <div class="date">{{ firstPost.createdOn | dataRus }}</div>
+            </div>
+          </div>
+          <div class="hr">
+            <hr
+              style="border-left: 1px solid black; height: 50px; margin: 20px"
+            />
+          </div>
+          <div class="author" style="align-items: center">
+            <img class="icon" src="assets/img/Timer.png" alt="time" />
+            <div class="name">
+              <div class="NickName">
+                <span class="text-uppercase">Время приготовления</span>
+              </div>
+              <div class="date">{{ firstPost.timeCooking }} минут</div>
+            </div>
+          </div>
+          <div class="hr">
+            <hr
+              style="border-left: 1px solid black; height: 50px; margin: 20px"
+            />
+          </div>
+          <div class="author">
+            <img class="icon" src="assets/img/ForkKnife.png" alt="knife" />
+            <div class="name">
+              <p>{{ firstPost.tags }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="twoCol d-flex">
+      <div class="d-flex" style="text-align: center">
+        <div class="d-inline-block">
+          <div class="favorite">
+            <button
+              (click)="apiService.toggleLike(firstPost.id)"
+              [ngStyle]="{
+                color: apiService.isLiked(firstPost.id) ? 'red' : 'grey'
+              }"
+            >
+              ♥
+            </button>
+          </div>
+          <p>В избранное</p>
+        </div>
+        <div class="d-inline-block ms-5">
+          <a (click)="onPrint()" role="button">
+            <img src="assets/img/print.png" alt="" />
+            <p>Распечатать</p>
+          </a>
+        </div>
+        <div class="d-inline-block ms-5">
+          <a (click)="openModal()" role="button">
+            <img src="assets/img/repost.png" alt="" />
+            <p>Поделиться</p>
+          </a>
+          <div class="modal" *ngIf="isModalVisible">
+            <div class="modal-content">
+              <div class="d-flex flex-column align-items-start">
+                <p class="s18w500h22b d-block">Поделиться этим рецептом?</p>
+                <p class="s14w400h22g d-block">
+                  Вы хотите поделиться этим рецептом со всеми?
+                </p>
+              </div>
+              <hr />
+              <div class="modal-buttons">
+                <button
+                  class="btn btn-primary"
+                  (click)="closeModal()"
+                  style="
+                    max-width: 118px;
+                    max-height: 50px;
+                    background: #ffffff;
+                    border-radius: 6px;
+                    color: #000000;
+                    border-color: #6b7280;
+                  "
+                >
+                  Закрыть
+                </button>
+                <button
+                  class="btn btn-primary"
+                  (click)="closeModal()"
+                  style="
+                    max-width: 118px;
+                    max-height: 50px;
+                    background: #3a3395;
+                    border-radius: 6px;
+                    color: #ffffff;
+                    margin-left: 17px;
+                  "
+                >
+                  Поделиться
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gridTwo d-grid mb-5">
+    <img class="oneCol" src="{{ firstPost.image }}" alt="" />
+
+    <div class="foodCen">
+      <div class="content">
+        <p class="s24w600h29b">Пищевая ценность</p>
+
+        <div class="foodValue d-flex justify-content-between">
+          <div class="s18w500h22g d-inline-block">
+            <p>Каллории</p>
+          </div>
+          <div class="s18w500h22b d-inline-block">
+            {{ firstPost.foodValue["calories"] }} ккал
+          </div>
+        </div>
+        <div class="foodValue">
+          <hr />
+        </div>
+        <div class="foodValue d-flex justify-content-between">
+          <div class="s18w500h22g d-inline-block">
+            <p>Жиры</p>
+          </div>
+          <div class="s18w500h22b d-inline-block">
+            {{ firstPost.foodValue["fats"] }} г
+          </div>
+        </div>
+        <div class="foodValue">
+          <hr />
+        </div>
+        <div class="foodValue d-flex justify-content-between">
+          <div class="s18w500h22g d-inline-block">
+            <p>Углеводы</p>
+          </div>
+          <div class="s18w500h22b d-inline-block">
+            {{ firstPost.foodValue["carbohydrates"] }} г
+          </div>
+        </div>
+        <div class="foodValue">
+          <hr />
+        </div>
+        <div class="foodValue d-flex justify-content-between">
+          <div class="s18w500h22g d-inline-block">
+            <p>Белки</p>
+          </div>
+          <div class="s18w500h22b d-inline-block">
+            {{ firstPost.foodValue["proteins"] }} г
+          </div>
+        </div>
+        <div class="foodValue">
+          <hr />
+        </div>
+      </div>
+      <div
+        class="s18w500h22g d-flex"
+        style="align-items: flex-end; justify-content: center"
+      >
+        Значения приблизительные
+      </div>
+    </div>
+  </div>
+  <div class="s18w500h22g mb-5">
+    {{ firstPost.body }}
+  </div>
+  <div class="gridTwo d-grid">
+    <div>
+      <p class="s36w600h44b pb-4">Ингредиенты</p>
+      <p class="s24w600h29b">Что вам понадобиться</p>
+      <div
+        class="form-check pt-4"
+        *ngFor="let item of firstPost.ingredients; let i = index"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckDefault"
+          (change)="ingredientCheck(i)"
+          [checked]="checkedIngredients[i]"
+        />
+        <p
+          [ngClass]="{ 'text-decoration-line-through': checkedIngredients[i] }"
+        >
+          {{ item.title }} - {{ item.description }}
+        </p>
+        <hr />
+      </div>
+    </div>
+    <div class="ms-5">
+      <p class="s36w600h44b pb-4">Прочие рецепты</p>
+      <div
+        class="f-flex"
+        style="align-items: center; padding-bottom: 24px"
+        *ngFor="let res of threePost"
+      >
+        <a routerLink="../{{ res.id }}" [queryParams]="{ id: res.id }">
+          <img
+            src="{{ res.image }}"
+            alt="time"
+            style="
+              width: 180px;
+              height: 120px;
+              border-radius: 30px;
+              padding-right: 10px;
+            "
+          />
+          <div class="d-inline-block">
+            <div class="">
+              <p class="s18w500h22b">{{ res.title }}</p>
+            </div>
+            <div class="s18w500h22g">
+              От {{ res.author["lastName"] }} {{ res.author["firstName"] }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-8 mt-5">
+    <p class="s36w600h44b pb-4">Шаги приготовления</p>
+    <div
+      class="form-check pt-4"
+      *ngFor="let item of firstPost.cookingSteps; let i = index"
+    >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="flexCheckDefault"
+        (change)="stepCheck(i)"
+        [checked]="checkedSteps[i]"
+      />
+      <div [ngClass]="{ 'text-decoration-line-through': checkedSteps[i] }">
+        <p class="s24w600h29b">{{ i + 1 }}. {{ item.title }}</p>
+        <p class="s18w500h22g">{{ item.description }}</p>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div class="pb-5 mt-5">
+    <p class="s36w600h44b d-flex text-align-center justify-content-center">
+      Возможно вам понравятся эти рецепты
+    </p>
+    <div class="gridFour d-grid">
+      <div class="m-4 position-relative" *ngFor="let res of fourPosts">
+        <a
+          routerLink="../{{ res.id }}"
+          [queryParams]="{ id: res.id }"
+          style="text-decoration: none"
+        >
+          <div class="fourImage">
+            <img
+              *ngIf="res.image !== 'Тестовый рецепт'; else noImage"
+              src="{{ res.image }}"
+              alt=""
+            />
+            <ng-template #noImage>
+              <div class="placeholder"></div>
+            </ng-template>
+          </div>
+          <p class="s18w500h22b">{{ res.title }}</p>
+          <div class="botIcon d-flex justify-content-between">
+            <div class="d-inline-block" style="align-items: center">
+              <img
+                class="d-inline-block"
+                src="assets/img/Timer.png"
+                alt="time"
+                width="24px"
+                height="24px"
+              />
+              <div class="d-inline-block s14w500h22b">
+                <div>{{ res.timeCooking }} минут</div>
+              </div>
+            </div>
+            <div class="d-inline-block">
+              <img
+                class="d-inline-block"
+                src="assets/img/ForkKnife.png"
+                alt="knife"
+              />
+              <div class="d-inline-block s14w500h22b">
+                <p>{{ res.tags }}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="likeIcon position-absolute" style="top: 0px; right: 0px">
+          <button
+            (click)="apiService.toggleLike(res.id)"
+            [ngStyle]="{ color: apiService.isLiked(res.id) ? 'red' : 'grey' }"
+            class="heart-button"
+          >
+            ♥
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <p class="s36w600h44b mt-5">Комментарии</p>
+  <div class="mb-3" *ngFor="let comment of comments">
+    <div class="author">
+      <img class="me-2" [src]="comment.user.avatar" alt="" />
+      <div>
+        <p>{{ comment.user.firstName }} {{ comment.user.lastName }}</p>
+        <P class="s14w400h22g">{{ comment.createdOn | dataTime }}</P>
+      </div>
+    </div>
+    <p class="ps-5">{{ comment.text }}</p>
+  </div>
+  <div class="form-floating" *ngIf="role !== 'gost'">
+    <textarea
+      class="form-control"
+      placeholder="Напишите ваше мнение..."
+      id="floatingTextarea2"
+      style="height: 100px"
+      [(ngModel)]="textComment"
+    ></textarea>
+    <label for="floatingTextarea2">Напишите ваше мнение...</label>
+    <div class="d-flex justify-content-end">
+      <button class="btnBlue btn btn-primary" (click)="addComents()">
+        Отправить
+      </button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

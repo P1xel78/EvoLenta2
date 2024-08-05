@@ -1,0 +1,96 @@
+<app-header></app-header>
+<div class="d-flex container justify-content-center">
+  <div class="auth">
+    <p class="s30w700h36b">Зарегистрируйте ваш аккаунт</p>
+    <form class="form">
+      <div class="d-flex flex-column p-2">
+        <label>Логин:</label
+        ><input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': log.invalid && (log.dirty || log.touched),
+            'is-valid': log.valid
+          }"
+          [(ngModel)]="login"
+          autocomplete="off"
+          name="log"
+          placeholder="Введите логин..."
+          required
+          minlength="1"
+          #log="ngModel"
+          pattern="[A-Za-z0-9_.@]+"
+        />
+      </div>
+      <div class="d-flex flex-column p-2">
+        <label>Пароль:</label
+        ><input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': pass.invalid && (pass.dirty || pass.touched),
+            'is-valid': pass.valid
+          }"
+          [(ngModel)]="password"
+          autocomplete="off"
+          name="pass"
+          placeholder="Введите пароль..."
+          required
+          minlength="4"
+          #pass="ngModel"
+          type="password"
+        />
+      </div>
+      <div class="d-flex data flex-column p-2">
+        <label>Имя</label
+        ><input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': name.invalid && (name.dirty || name.touched),
+            'is-valid': name.valid
+          }"
+          [(ngModel)]="firstName"
+          autocomplete="off"
+          name="name"
+          placeholder="Введите ваше имя..."
+          required
+          #name="ngModel"
+        />
+      </div>
+      <div class="d-flex data flex-column p-2">
+        <label>Фамилия:</label
+        ><input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': last.invalid && (last.dirty || last.touched),
+            'is-valid': last.valid
+          }"
+          [(ngModel)]="lastName"
+          autocomplete="off"
+          name="last"
+          placeholder="Введите вашу фамилию..."
+          required
+          #last="ngModel"
+        />
+      </div>
+      <div class="d-flex data flex-column p-2">
+        <label>Отчество(при наличии):</label
+        ><input
+          class="form-control"
+          #midl="ngModel"
+          (ngModel)="(middleName)"
+          autocomplete="off"
+          name="midl"
+          placeholder="Введите ваше отчество..."
+        />
+      </div>
+      <button
+        (click)="onRegister()"
+        [disabled]="log.invalid || pass.invalid || name.invalid || last.invalid"
+        class="btnBlue p-2 mt-3"
+        type="submit"
+      >
+        Зарегистрироваться
+      </button>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

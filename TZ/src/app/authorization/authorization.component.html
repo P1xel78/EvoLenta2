@@ -1,0 +1,119 @@
+<app-header></app-header>
+<div class="container d-flex justify-content-center">
+  <div class="auth">
+    <p class="s30w700h36b">Войдите в ваш аккаунт</p>
+    <form class="form">
+      <div class="data d-flex flex-column p-2">
+        <label>Логин:</label>
+        <input
+          minlength="1"
+          #login="ngModel"
+          pattern="[A-Za-z0-9_.@]+"
+          name="login"
+          type="text"
+          [ngClass]="{
+            'border border-2 border-danger':
+              login.invalid && (login.dirty || login.touched)
+          }"
+          [ngClass]="{ 'border border-2 border-success': login.valid }"
+          placeholder="Введите логин..."
+          autocomplete="off"
+          [(ngModel)]="username"
+          required
+        />
+        <div *ngIf="login.invalid && (login.dirty || login.touched)">
+          <div
+            *ngIf="login.hasError('minlength')"
+            class="alert alert-danger mt-2"
+            role="alert"
+          >
+            Минимальная длинна должна быть больше 1 символов
+          </div>
+          <div
+            *ngIf="login.hasError('required')"
+            class="alert alert-danger mt-2"
+            role="alert"
+          >
+            Поле должно быть заполнено
+          </div>
+          <div
+            *ngIf="login.hasError('pattern')"
+            class="alert alert-danger mt-2"
+            role="alert"
+          >
+            Поле не должно содержать кириллицы и знаков /,&()^%$#!№:?
+          </div>
+        </div>
+      </div>
+      <div class="data d-flex flex-column p-2">
+        <label>Пароль:</label>
+        <input
+          minlength="4"
+          #pass="ngModel"
+          name="pass"
+          type="password"
+          [ngClass]="{
+            'border border-2 border-danger':
+              pass.invalid && (pass.dirty || pass.touched)
+          }"
+          [ngClass]="{ 'border border-2 border-success': pass.valid }"
+          placeholder="Введите пароль..."
+          autocomplete="off"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
+          <div
+            *ngIf="pass.hasError('minlength')"
+            class="alert alert-danger mt-2"
+            role="alert"
+          >
+            Минимальная длинна должна быть больше 4 символов
+          </div>
+
+          <div
+            *ngIf="pass.hasError('required')"
+            class="alert alert-danger mt-2"
+            role="alert"
+          >
+            Поле должно быть заполнено
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between p-2">
+        <div class="d-inline-block">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="isQuickSession"
+            [checked]="isQuickSession"
+            (change)="onCheckboxChange()"
+          />
+          Быстрая сессия
+        </div>
+        <div class="register d-inline-block">
+          <a routerLink="/registration">Зарегистрироваться</a>
+        </div>
+      </div>
+      <button
+        class="data p-2 ms-2"
+        [disabled]="login.invalid || pass.invalid"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Войти
+      </button>
+      <div class="d-flex justify-content-center m-2">
+        <P>Или войти через</P>
+      </div>
+      <div class="d-flex justify-content-center border p-2">
+        <a role="button">
+          <img src="assets/img/Social.png" alt="" />
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

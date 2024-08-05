@@ -1,0 +1,326 @@
+<app-header></app-header>
+<div class="container">
+  <carousel [showIndicators]="false" [interval]="5000">
+    <slide *ngFor="let res of firstPosts; let i = index">
+      <div class="gridTwo d-grid">
+        <div class="oneCol text-start row row-cols-1">
+          <div class="col">
+            <p class="s60w600h72b">{{ res.title }}</p>
+            <div class="s16w400h24g">{{ res.body }}</div>
+          </div>
+          <div class="col d-flex align-items-end">
+            <div class="d-block w-100">
+              <div class="d-flex justify-content-start mb-4">
+                <div class="time d-inline-block" style="align-items: center">
+                  <img
+                    class="d-inline-block"
+                    src="assets/img/Timer.png"
+                    alt="time"
+                    width="24px"
+                    height="24px"
+                  />
+                  <div class="d-inline-block s14w500h22b">
+                    <div>{{ res.timeCooking }} минут</div>
+                  </div>
+                </div>
+                <div class="food d-inline-block">
+                  <img
+                    class="d-inline-block"
+                    src="assets/img/ForkKnife.png"
+                    alt="knife"
+                  />
+                  <div class="d-inline-block s14w500h22b">
+                    <p>{{ res.tags }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                  <img
+                    class="author"
+                    src="{{ res.author.avatar }}"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                  />
+                  <div>
+                    <p class="s18w500h22b">
+                      {{ res.author.firstName }} {{ res.author.lastName }}
+                    </p>
+                    <p class="s14w400h22g">{{ res.createdOn | dataRus }}</p>
+                  </div>
+                </div>
+                <button
+                  class="btnBlue"
+                  routerLink="recipes/{{ res.id }}"
+                  [queryParams]="{ id: res.id }"
+                >
+                  Посмотреть <img src="assets/img/PlayCircle.png" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img class="twoCol" src="{{ res.image }}" alt="" />
+      </div>
+    </slide>
+  </carousel>
+
+  <div class="centerText pt-5">
+    <p class="s48w600h58b">Лучшие рецепты</p>
+    <p>
+      На нашем сайте вы найдете лучшие рецепты, которые помогут вам создавать
+      великолепные блюда и порадовать своих близких и гостей своим кулинарным
+      мастерством.
+    </p>
+  </div>
+  <div class="gridThree d-grid">
+    <div class="m-4 position-relative" *ngFor="let res of bestPosts">
+      <a
+        routerLink="recipes/{{ res.id }}"
+        [queryParams]="{ id: res.id }"
+        style="text-decoration: none"
+      >
+        <div class="threeImag">
+          <img
+            *ngIf="res.image !== 'Тестовый рецепт'; else noImage"
+            src="{{ res.image }}"
+            alt=""
+          />
+          <ng-template #noImage>
+            <div class="placeholder"></div>
+          </ng-template>
+        </div>
+        <p class="s18w500h22b">{{ res.title }}</p>
+        <div class="botIcon d-flex justify-content-between">
+          <div class="d-inline-block" style="align-items: center">
+            <img
+              class="d-inline-block"
+              src="assets/img/Timer.png"
+              alt="time"
+              width="24px"
+              height="24px"
+            />
+            <div class="d-inline-block s14w500h22b">
+              <div>{{ res.timeCooking }} минут</div>
+            </div>
+          </div>
+          <div class="d-inline-block">
+            <img
+              class="d-inline-block"
+              src="assets/img/ForkKnife.png"
+              alt="knife"
+            />
+            <div class="d-inline-block s14w500h22b">
+              <p>{{ res.tags }}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="likeIcon position-absolute" style="top: 0px; right: 0px">
+        <button
+          (click)="apiService.toggleLike(res.id)"
+          [ngStyle]="{ color: apiService.isLiked(res.id) ? 'red' : 'grey' }"
+          class="heart-button"
+        >
+          ♥
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button
+      class="btn btn-outline-secondary"
+      style="width: 185px; font-size: 18px"
+      *ngIf="canLoadMore"
+      (click)="loadMoreRecipes()"
+    >
+      Посмотреть еще
+    </button>
+  </div>
+  <hr class="mt-5" />
+  <div class="gridFour pt-5">
+    <div class="row d-flex align-items-center">
+      <div class="m-4">
+        <div class="col"><p class="s48w600h58b">Попробуйте эти вкусные рецепты</p></div>
+        <div class="col s18w500h22g">
+          Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqut enim ad minim
+        </div>
+      </div>
+      <div class="gridFour d-grid">
+        <div class="m-4 position-relative" *ngFor="let res of fourPosts">
+          <a
+            routerLink="recipes/{{ res.id }}"
+            [queryParams]="{ id: res.id }"
+            style="text-decoration: none"
+          >
+            <div class="fourImage">
+              <img
+                *ngIf="res.image !== 'Тестовый рецепт'; else noImage"
+                src="{{ res.image }}"
+                alt=""
+              />
+              <ng-template #noImage>
+                <div class="placeholder"></div>
+              </ng-template>
+            </div>
+            <p class="s18w500h22b">{{ res.title }}</p>
+            <div class="botIcon d-flex justify-content-between">
+              <div class="d-inline-block" style="align-items: center">
+                <img
+                  class="d-inline-block"
+                  src="assets/img/Timer.png"
+                  alt="time"
+                  width="24px"
+                  height="24px"
+                />
+                <div class="d-inline-block s14w500h22b">
+                  <div>{{ res.timeCooking }} минут</div>
+                </div>
+              </div>
+              <div class="d-inline-block">
+                <img
+                  class="d-inline-block"
+                  src="assets/img/ForkKnife.png"
+                  alt="knife"
+                />
+                <div class="d-inline-block s14w500h22b">
+                  <p>{{ res.tags }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="likeIcon position-absolute" style="top: 0px; right: 0px">
+            <button
+              (click)="apiService.toggleLike(res.id)"
+              [ngStyle]="{ color: apiService.isLiked(res.id) ? 'red' : 'grey' }"
+              class="heart-button"
+            >
+              ♥
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="mt-5 mb-5" />
+  <div class="centerText">
+    <p class="s48w600h58b">Почему именно мы?</p>
+  </div>
+  <div class="gridFour d-grid m-5">
+    <div class="m-4 d-flex">
+      <div class="d-inline-block me-2" style="color: green; font-size: 30px">
+        ✓
+      </div>
+      <div class="d-inline-block">
+        <p class="s18w500h22b">Проверенные рецепты</p>
+        <p class="s16w400h24g">
+          Вы можете найти множество проверенных рецептов, которые помогут вам
+          приготовить вкусные и разнообразные блюда для всей семьи.
+        </p>
+      </div>
+    </div>
+    <div class="m-4 d-flex">
+      <div class="d-inline-block me-2" style="color: green; font-size: 30px">
+        ✓
+      </div>
+      <div class="d-inline-block">
+        <p class="s18w500h22b">Для всех</p>
+        <p class="s16w400h24g">
+          Вы сможете найти легкие и вкусные блюда, которые понравятся и детям, и
+          взрослым.
+        </p>
+      </div>
+    </div>
+    <div class="m-4 d-flex">
+      <div class="d-inline-block me-2" style="color: green; font-size: 30px">
+        ✓
+      </div>
+      <div class="d-inline-block">
+        <p class="s18w500h22b">Огромное разнообразие</p>
+        <p class="s16w400h24g">
+          Разнообразие рецептов для всех порадует самых разносторонних гурманов
+        </p>
+      </div>
+    </div>
+    <div class="m-4 d-flex">
+      <div class="d-inline-block me-2" style="color: green; font-size: 30px">
+        ✓
+      </div>
+      <div class="d-inline-block">
+        <p class="s18w500h22b">Храним рецепты для вас</p>
+        <p class="s16w400h24g">
+          Это отличный способ организовать и хранить свою коллекцию кулинарных
+          рецептов. Вместо того, чтобы хранить бумажные копии или оставлять их в
+          разных кулинарных книгах.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="gridTwo d-grid"
+    style="
+      background-color: #e7f9fd;
+      min-height: 264px;
+      align-items: center;
+      text-align: center;
+    "
+  >
+    <div class="d-inline-block" style="display: flex; justify-content: center">
+      <p class="s30w700h36b">Хотите получать новые рецепты?</p>
+      <p class="s16w400h24g" style="text-align: start; margin-left: 4vw">
+        Не пропустите ни одного вкусного рецепта! Подпишитесь на нашу рассылку,
+        чтобы получать новые кулинарные идеи и рецепты прямо в свою почту.
+      </p>
+    </div>
+    <div class="emailForm d-inline-block">
+      <form action="" class="form" style="flex-wrap: nowrap">
+        <input
+          minlength="1"
+          required
+          #name="ngModel"
+          name="name"
+          [pattern]="emailPattern"
+          [(ngModel)]="email"
+          type="email"
+          [ngClass]="{
+            'border border-2 border-danger':
+              name.invalid && (name.dirty || name.touched)
+          }"
+          [ngClass]="{ 'border border-2 border-success': name.valid }"
+          style="width: 281px; height: 50px; border-radius: 6px"
+          placeholder="Введите ваш email..."
+          autocomplete="off"
+        />
+        <button
+          class="btnBlue btn btn-prymary"
+          (click)="emailGet()"
+          [disabled]="name.invalid"
+          type="submit"
+        >
+          Подписаться
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer> </app-footer>
+<div class="text-align-center">
+  <div *ngIf="isVisible" class="notification d-flex row">
+    <div class="col">
+      <img class="d-inline-bloc" src="assets/img/Icon.png" alt="" />
+      <p class="d-inline-block">
+        Хорошие новости! Мы открыли наш интернет-магазин
+      </p>
+    </div>
+    <div class="col d-flex align-items-start justify-content-end">
+      <button
+        class="d-inline-block btn btn-close me-3"
+        style="color: #ffffff"
+        (click)="closeNotification()"
+      ></button>
+    </div>
+  </div>
+</div>

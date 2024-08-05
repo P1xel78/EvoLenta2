@@ -1,0 +1,63 @@
+hr {
+  margin: 0;
+
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 110px;
+
+  position: absolute;
+  border: 1.5px solid #999898;
+}
+
+.header {
+  padding-top: 40px;
+  display: flex;
+  vertical-align: bottom;
+  min-height: 120px;
+  position: relative;
+}
+
+.menu a {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  text-decoration: none;
+}
+
+.menu li {
+  display: inline-block;
+  align-items: flex-end;
+}
+
+.smallText {
+  display: none;
+}
+
+.dropdown-item {
+  text-align: start;
+  justify-content: start;
+}
+
+@media (max-width: 992px) {
+  .menu a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .bigText {
+    display: none;
+  }
+  .smallText {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 572px) {
+  .menu li + li {
+    padding-left: 10px;
+  }
+}

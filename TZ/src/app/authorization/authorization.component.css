@@ -1,0 +1,30 @@
+.auth {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.auth button {
+  width: 50vh;
+  max-height: 38px;
+  background: #3a3395;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+.data input {
+  width: 50vh;
+  border-radius: 6px;
+}
+
+.register a {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #3a3395;
+  width: 20vh;
+}
